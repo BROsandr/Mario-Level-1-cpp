@@ -14,7 +14,7 @@ class State {
   explicit State();
 
   std::map<std::string_view, int> Cleanup();
-  void Startup(double current_time, std::map<std::string_view, int> persistant);
+  void Startup(double current_time, std::map<std::string_view, int> persist);
   virtual void Update(sf::Keyboard::Key keys, double current_time) = 0;
 
   double start_time{0.0};
@@ -35,6 +35,7 @@ class Control {
   void EventLoop();
   void Update();
   void FlipState(); 
+  void ToggleShowFps(sf::Keyboard::Key key);
 
   bool done{false};
   sf::Clock clock;

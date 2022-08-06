@@ -10,11 +10,17 @@
 int main() {
 
   Control run_it{kOriginalCaption};
-  std::map<std::string_view, State> state_dict{
-      {kMainMenu, Menu{}},
-      {kLoadScreen, LoadScreen{}},
-      {kGameOver, GameOver{}},
-      {kLevel1, Level1{}}
+
+  Menu menu;
+  LoadScreen load_screen;
+  GameOver game_over;
+  Level1 level1;
+
+  std::map<std::string_view, State*> state_dict{
+      {kMainMenu, &menu},
+      {kLoadScreen, &load_screen},
+      {kGameOver, &game_over},
+      {kLevel1, &level1}
   };
 
   run_it.SetupStates(state_dict, kMainMenu);

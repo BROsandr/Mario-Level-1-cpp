@@ -65,7 +65,14 @@ std::map<std::string_view, int> State::Cleanup() {
   return persist;
 }
 
-void State::Startup(double current_time, std::map<std::string_view, int> persistant) {
-  persist = persistant;
+void State::Startup(double current_time, std::map<std::string_view, int> _persist) {
+  persist = _persist;
   start_time = current_time;
+}
+void Control::ToggleShowFps(sf::Keyboard::Key key) {
+  if (key == sf::Keyboard::F5) {
+    show_fps = !show_fps;
+    if (!show_fps)
+      Window::instance().setTitle(caption);
+  }
 }
