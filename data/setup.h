@@ -2,13 +2,13 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-struct Screen {
+struct Window {
  public:
   static sf::RenderWindow& instance(); 
 
-  Screen(const Screen&) = delete;
-  void operator=(const Screen&) = delete;
+  Window(const Window&) = delete;
+  void operator=(const Window&) = delete;
 
  private:
-  Screen() {};
+  explicit Window() {};
 }; 

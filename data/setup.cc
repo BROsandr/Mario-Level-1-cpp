@@ -4,9 +4,9 @@
 
 #include "constants.h"
 
-sf::RenderWindow& Screen::instance() {
-  static sf::RenderWindow instance(sf::VideoMode(kScreenSize[0], kScreenSize[1]), 
-             kOriginalCaption);
+sf::RenderWindow& Window::instance() {
+  static sf::RenderWindow instance(sf::VideoMode(kScreenSize[0], kScreenSize[1]),
+                                   "");
   
   return instance;
 }

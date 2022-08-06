@@ -9,7 +9,7 @@
 
 int main() {
 
-  Control run_it;
+  Control run_it{kOriginalCaption};
   std::map<std::string_view, State> state_dict{
       {kMainMenu, Menu{}},
       {kLoadScreen, LoadScreen{}},
