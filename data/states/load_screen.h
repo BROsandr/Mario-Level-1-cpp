@@ -4,15 +4,15 @@
 
 class LoadScreen : public State {
  public:
-  explicit LoadScreen();
+  explicit LoadScreen() {};
 };
 
 class GameOver : public State {
  public:
-  explicit GameOver();
+  explicit GameOver() {};
 };
 
 class TimeOut : public State {
  public:
-  explicit TimeOut();
+  explicit TimeOut() {};
 };

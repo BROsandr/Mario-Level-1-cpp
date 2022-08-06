@@ -4,5 +4,5 @@
 
 class Menu : public State {
  public:
-  explicit Menu();
+  explicit Menu() {};
 };

@@ -5,25 +5,14 @@ std::map<std::string_view, sf::Keyboard::Key>& keybinding() {
   return keybinding;
 }
 
-Control::Control(const char* caption) {
+Control::Control() {
 }
 
-State::State(sf::RenderWindow& screen) : screen_{screen} {
+State::State() {
 }
 
-void Control::SetupStates(std::map<std::string_view, State>& state_dict, State& start_state) {
-  set_state_dict(state_dict);
-}
-
-
-void Control::set_state_dict(std::map<std::string_view, State> state_dict) {
-  state_dict_ = state_dict;
-}
-
-void Control::set_state_name(char* state_name) {
-  state_name_ = state_name;
-}
-
-void Control::set_state(State state) {
-  state_ = state;
+void Control::SetupStates(std::map<std::string_view, State>& _state_dict, const char _start_state[]) {
+  state_dict = _state_dict;
+  state_name = _start_state;
+  state = state_dict[state_name];
 }

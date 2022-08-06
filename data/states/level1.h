@@ -4,5 +4,5 @@
 
 class Level1 : public State {
  public:
-  explicit Level1();
+  explicit Level1() {};
 };

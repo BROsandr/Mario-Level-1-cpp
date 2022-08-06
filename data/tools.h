@@ -9,29 +9,23 @@ std::map<std::string_view, sf::Keyboard::Key>& keybinding();
 
 class State {
  public:
-  explicit State(sf::RenderWindow& screen);
-
+  explicit State();
 };
 
 class Control {
  public:
-  explicit Control(const char* caption);
+  explicit Control();
 
-  void SetupStates(std::map<std::string_view, State>& state_dict, State& start_state);
-  void set_state_dict(std::map<std::string_view, State> state_dict);
-  void set_state_name(char* state_name);
-  void set_state(State state);
+  void SetupStates(std::map<std::string_view, State>& state_dict, const char start_state[]);
 
- private:
-  sf::RenderWindow& screen_;
-  bool done_{false};
-  sf::Clock clock_;
-  const char* caption_{""};
-  const int fps_{60};
-  bool show_fps_{false};
-  double current_time_{0.0};
-  std::map<std::string_view, State> state_dict_;
-  char* state_name_;
-  State state_;
+  bool done{false};
+  sf::Clock clock;
+  const char* caption{""};
+  const int fps{60};
+  bool show_fps{false};
+  double current_time{0.0};
+  std::map<std::string_view, State> state_dict;
+  const char* state_name{""};
+  State state;
 };
 

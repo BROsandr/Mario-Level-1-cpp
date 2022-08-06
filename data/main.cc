@@ -8,9 +8,8 @@
 #include "states/load_screen.h"
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode(kScreenSize[0], kScreenSize[1]), kOriginalCaption);
 
-  Control run_it{kOriginalCaption};
+  Control run_it;
   std::map<std::string_view, State> state_dict{
       {kMainMenu, Menu{}},
       {kLoadScreen, LoadScreen{}},
