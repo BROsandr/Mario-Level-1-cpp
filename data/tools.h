@@ -6,6 +6,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 #include <string>
+#include <filesystem>
+#include <SFML/Graphics/Texture.hpp>
 
 std::map<std::string_view, sf::Keyboard::Key>& keybinding();
 
@@ -14,7 +16,7 @@ class State {
   explicit State();
 
   std::map<std::string_view, int> Cleanup();
-  void Startup(double current_time, std::map<std::string_view, int> persist);
+  virtual void Startup(double current_time, std::map<std::string_view, int> persist);
   virtual void Update(sf::Keyboard::Key keys, double current_time) = 0;
 
   double start_time{0.0};
@@ -49,3 +51,8 @@ class Control {
   State* state{nullptr};
 };
 
+std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path directory,
+                                                    std::vector<std::string_view> accept = {"png", 
+                                                                                            "jpg",
+                                                                                            "bmp"},
+                                                    sf::Color colorkey = {255, 0, 255});

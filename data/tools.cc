@@ -76,3 +76,32 @@ void Control::ToggleShowFps(sf::Keyboard::Key key) {
       Window::instance().setTitle(caption);
   }
 }
+
+std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path directory,
+                                                    std::vector<std::string_view> accept,
+                                                    sf::Color colorkey) {
+  static std::map<std::string_view, sf::Texture> graphics;
+  static bool is_first_pass{true};
+
+  if (is_first_pass)
+    if (std::filesystem::is_directory(directory)) {
+      for (auto pic : directory) {
+        std::string name{pic.stem()};
+        std::string ext{pic.extension()};
+        std::for_each(ext.begin(), ext.end(), [](char& c) {
+          c = tolower(c);
+        });
+        if (std::find(accept.begin(), accept.end(), ext) != accept.end()) {
+          sf::Texture texture;
+          texture.loadFromFile(pic);
+          graphics[name] = texture;
+        }
+      }
+    } else {
+       throw std::filesystem::filesystem_error{"path doesn't exist", std::error_code{}};
+    }
+
+  is_first_pass = false;
+
+  return graphics;
+}

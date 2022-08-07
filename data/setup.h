@@ -1,6 +1,8 @@
 #pragma once 
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <map>
+#include <filesystem>
 
 struct Window {
  public:
@@ -12,3 +14,5 @@ struct Window {
  private:
   explicit Window() {};
 }; 
+
+std::map<std::string_view, sf::Texture>& gfx();
