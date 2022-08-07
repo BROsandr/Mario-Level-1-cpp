@@ -15,8 +15,6 @@ void LoadScreen::Startup(double current_time, std::map<std::string_view, int> _p
   next = SetNextState();
 
   std::string_view info_state{SetOverheadInfoState()};
-
-  over
 }
 
 std::string_view LoadScreen::SetNextState() {
