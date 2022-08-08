@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <map>
 #include <string_view>
 #include <SFML/Window/Keyboard.hpp>
@@ -56,3 +57,5 @@ std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path direct
                                                                                             "jpg",
                                                                                             "bmp"},
                                                     sf::Color colorkey = {255, 0, 255});
+
+sf::Sprite GetImage(sf::Texture& texture, int x, int y, int width, int height);

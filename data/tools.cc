@@ -105,3 +105,7 @@ std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path direct
 
   return graphics;
 }
+
+
+sf::Sprite GetImage(sf::Texture& texture, int x, int y, int width, int height) {
+  

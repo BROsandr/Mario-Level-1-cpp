@@ -13,3 +13,9 @@ OverheadInfo::OverheadInfo(std::map<std::string_view, int> _game_info, char* _st
   state = _state;
   game_info = _game_info;
 }
+void OverheadInfo::CreateImageDict() {
+  std::vector<sf::Sprite> image_list;
+  image_list.push_back(sprite
+}
+
+sf::Sprite OverheadInfo::GetImage(int x, int y, int width, int height);
