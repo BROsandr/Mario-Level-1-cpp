@@ -10,11 +10,11 @@ class LoadScreen : public State {
   explicit LoadScreen() {};
 
   void Update(sf::Keyboard::Key keys, double current_time) override;
-  void Startup(double current_time, std::map<std::string_view, int> persist) override;
-  std::string_view SetNextState();
-  std::string_view SetOverheadInfoState();
+  void Startup(double current_time, std::map<const char*, int> persist) override;
+  const char* SetNextState();
+  const char* SetOverheadInfoState();
 
-  std::map<std::string_view, int> game_info;
+  std::map<const char*, int> game_info;
   std::unique_ptr<OverheadInfo> overhead_info;
 };
 

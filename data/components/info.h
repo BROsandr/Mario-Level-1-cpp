@@ -7,7 +7,7 @@
 
 struct OverheadInfo {
  public:
-  OverheadInfo(std::map<const char*, int> game_info, std::string& state);
+  OverheadInfo(std::map<const char*, int> game_info, const char* state);
 
   void CreateImageDict();
   sf::Sprite GetImage(int x, int y, int width, int height);
@@ -18,7 +18,7 @@ struct OverheadInfo {
   double current_time{-1};
   int total_lives{-1};
   int top_score{-1};
-  std::string state{""};
+  const char* state{""};
   std::map<const char*, int> game_info;
   std::map<char, sf::Sprite> image_dict;
 };

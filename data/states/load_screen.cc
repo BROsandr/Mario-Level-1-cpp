@@ -9,20 +9,20 @@ void LoadScreen::Update(sf::Keyboard::Key keys, double current_time) {
   }
 }
 
-void LoadScreen::Startup(double current_time, std::map<std::string_view, int> _persist) {
+void LoadScreen::Startup(double current_time, std::map<const char*, int> _persist) {
   State::Startup(current_time, _persist);
   game_info = persist;
   next = SetNextState();
 
-  std::string_view info_state{SetOverheadInfoState()};
+  const char* info_state{SetOverheadInfoState()};
 
   overhead_info = std::make_unique<OverheadInfo>(game_info, info_state);
 }
 
-std::string_view LoadScreen::SetNextState() {
+const char* LoadScreen::SetNextState() {
   return kLevel1;
 }
 
-std::string_view LoadScreen::SetOverheadInfoState() {
+const char* LoadScreen::SetOverheadInfoState() {
   return kLoadScreen;
 }

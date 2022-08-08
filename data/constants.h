@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string_view>
-
 constexpr int kScreenHeight{600};
 constexpr int kScreenWidth{600};
 

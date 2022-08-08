@@ -4,8 +4,8 @@
 
 #include "setup.h"
 
-std::map<std::string_view, sf::Keyboard::Key>& keybinding() {
-  static std::map<std::string_view, sf::Keyboard::Key> keybinding;
+std::map<const char*, sf::Keyboard::Key>& keybinding() {
+  static std::map<const char*, sf::Keyboard::Key> keybinding;
   return keybinding;
 }
 
@@ -16,7 +16,7 @@ Control::Control(const char caption[]) {
 State::State() {
 }
 
-void Control::SetupStates(std::map<std::string_view, State*>& _state_dict, const char _start_state[]) {
+void Control::SetupStates(std::map<const char*, State*>& _state_dict, const char _start_state[]) {
   state_dict = _state_dict;
   state_name = _start_state;
   state = state_dict[state_name];
@@ -52,20 +52,20 @@ void Control::Update() {
 }
 
 void Control::FlipState() {
-  std::string previous{state_name};
+  const char* previous{state_name};
   state_name = state->next;
-  std::map<std::string_view, int> persist = state->Cleanup();
+  std::map<const char*, int> persist = state->Cleanup();
   state = state_dict[state_name];
   state->Startup(current_time, persist);
   state->previous = previous;
 }
 
-std::map<std::string_view, int> State::Cleanup() {
+std::map<const char*, int> State::Cleanup() {
   done = false;
   return persist;
 }
 
-void State::Startup(double current_time, std::map<std::string_view, int> _persist) {
+void State::Startup(double current_time, std::map<const char*, int> _persist) {
   persist = _persist;
   start_time = current_time;
 }
@@ -77,10 +77,10 @@ void Control::ToggleShowFps(sf::Keyboard::Key key) {
   }
 }
 
-std::map<std::string_view, sf::Image>& LoadAllGfx(std::filesystem::path directory,
-                                                    std::vector<std::string_view> accept,
+std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
+                                                    std::vector<const char*> accept,
                                                     sf::Color colorkey) {
-  static std::map<std::string_view, sf::Image> graphics;
+  static std::map<const char*, sf::Image> graphics;
   static bool is_first_pass{true};
 
   if (is_first_pass)
@@ -94,7 +94,7 @@ std::map<std::string_view, sf::Image>& LoadAllGfx(std::filesystem::path director
         if (std::find(accept.begin(), accept.end(), ext) != accept.end()) {
           sf::Image image;
           image.loadFromFile(pic);
-          graphics[name] = image;
+          graphics[name.c_str()] = image;
         }
       }
     } else {

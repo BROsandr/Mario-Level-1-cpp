@@ -16,7 +16,7 @@ int main() {
   GameOver game_over;
   Level1 level1;
 
-  std::map<std::string_view, State*> state_dict{
+  std::map<const char*, State*> state_dict{
       {kMainMenu, &menu},
       {kLoadScreen, &load_screen},
       {kGameOver, &game_over},
