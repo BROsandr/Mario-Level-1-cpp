@@ -24,4 +24,5 @@ int main() {
   };
 
   run_it.SetupStates(state_dict, kMainMenu);
+  run_it.main();
 }

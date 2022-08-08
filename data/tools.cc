@@ -1,7 +1,6 @@
 #include "tools.h"
 
 #include <SFML/Window/Event.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
 
 #include "setup.h"
 
@@ -26,10 +25,6 @@ void Control::SetupStates(std::map<std::string_view, State*>& _state_dict, const
 void Control::main() {
   while (!done && Window::instance().isOpen()) {
     EventLoop();
-
-    Window::instance().clear();
-    Window::instance().draw(sf::CircleShape{100.f});
-    Window::instance().display();
   }
 }
 
