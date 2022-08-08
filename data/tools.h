@@ -3,7 +3,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <map>
-#include <string_view>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 #include <string>
@@ -16,8 +15,8 @@ class State {
  public:
   explicit State();
 
-  std::map<std::string_view, int> Cleanup();
-  virtual void Startup(double current_time, std::map<std::string_view, int> persist);
+  std::map<const char*, int> Cleanup();
+  virtual void Startup(double current_time, std::map<const char*, int> persist);
   virtual void Update(sf::Keyboard::Key keys, double current_time) = 0;
 
   double start_time{0.0};
@@ -52,10 +51,8 @@ class Control {
   State* state{nullptr};
 };
 
-std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path directory,
+std::map<std::string_view, sf::Image>& LoadAllGfx(std::filesystem::path directory,
                                                     std::vector<std::string_view> accept = {"png", 
                                                                                             "jpg",
                                                                                             "bmp"},
                                                     sf::Color colorkey = {255, 0, 255});
-
-sf::Sprite GetImage(sf::Texture& texture, int x, int y, int width, int height);

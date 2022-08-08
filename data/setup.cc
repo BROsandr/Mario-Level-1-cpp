@@ -12,6 +12,6 @@ sf::RenderWindow& Window::instance() {
   return instance;
 }
 
-std::map<std::string_view, sf::Texture>& gfx() {
+std::map<std::string_view, sf::Image>& gfx() {
   return LoadAllGfx(std::filesystem::path("resources") / "graphics");
 }

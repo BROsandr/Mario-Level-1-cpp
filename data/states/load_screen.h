@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "tools.h"
+#include "components/info.h"
 
 class LoadScreen : public State {
  public:
@@ -12,6 +15,7 @@ class LoadScreen : public State {
   std::string_view SetOverheadInfoState();
 
   std::map<std::string_view, int> game_info;
+  std::unique_ptr<OverheadInfo> overhead_info;
 };
 
 class GameOver : public State {

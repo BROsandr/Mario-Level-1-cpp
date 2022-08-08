@@ -77,10 +77,10 @@ void Control::ToggleShowFps(sf::Keyboard::Key key) {
   }
 }
 
-std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path directory,
+std::map<std::string_view, sf::Image>& LoadAllGfx(std::filesystem::path directory,
                                                     std::vector<std::string_view> accept,
                                                     sf::Color colorkey) {
-  static std::map<std::string_view, sf::Texture> graphics;
+  static std::map<std::string_view, sf::Image> graphics;
   static bool is_first_pass{true};
 
   if (is_first_pass)
@@ -92,9 +92,9 @@ std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path direct
           c = tolower(c);
         });
         if (std::find(accept.begin(), accept.end(), ext) != accept.end()) {
-          sf::Texture texture;
-          texture.loadFromFile(pic);
-          graphics[name] = texture;
+          sf::Image image;
+          image.loadFromFile(pic);
+          graphics[name] = image;
         }
       }
     } else {
@@ -105,7 +105,3 @@ std::map<std::string_view, sf::Texture>& LoadAllGfx(std::filesystem::path direct
 
   return graphics;
 }
-
-
-sf::Sprite GetImage(sf::Texture& texture, int x, int y, int width, int height) {
-  
