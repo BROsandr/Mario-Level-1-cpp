@@ -19,6 +19,7 @@ OverheadInfo::OverheadInfo(std::map<const char*, int> _game_info, const char* _s
   game_info = _game_info;
 
   CreateImageDict();
+  CreateScoreGroup();
 }
 
 void OverheadInfo::CreateImageDict() {
@@ -81,4 +82,44 @@ sf::Sprite OverheadInfo::GetImage(int x, int y, int width, int height) {
   sf::Sprite sprite{sprite_sheet, {x, y, width, height}};
   sprite.scale({2.9, 2.9});
   return sprite;
+}
+
+void OverheadInfo::Draw() {
+  if (state == kMainMenu) {
+    /* DrawMainMenuInfo(); */
+  } else if (state == kLoadScreen) {
+    DrawLoadingScreenInfo();
+  }
+}
+
+void OverheadInfo::DrawLoadingScreenInfo() {
+  for (auto info : score_images)
+    Window::instance().draw(info);
+}
+
+void OverheadInfo::CreateScoreGroup() {
+  CreateLabel(score_images, "000000", 75, 55);
+}
+
+void OverheadInfo::CreateLabel(std::list<sf::Sprite>& label_list, 
+                 const std::string& string, 
+                 int x, 
+                 int y) {
+  for (auto letter : string) 
+    label_list.push_back(image_dict[letter]);
+
+  SetLabelRects(label_list, x, y);
+}
+
+void OverheadInfo::SetLabelRects(std::list<sf::Sprite>& label_list, int x, int y) {
+  int i{0};
+  for (auto letter : label_list) {
+    letter.setPosition(x + ((letter.getTextureRect().width + 3) * i), y);
+    if(letter.getTexture() == image_dict['-'].getTexture()) 
+  letter.setPosition(letter.getPosition().x + 7, letter.getPosition().y + 2);
+    
+  }
+}
+
+void OverheadInfo::Update(std::map<const char*, int>& level_info) {
 }

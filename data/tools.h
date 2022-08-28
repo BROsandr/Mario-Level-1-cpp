@@ -8,6 +8,8 @@
 #include <filesystem>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "components/info.h"
+
 std::map<const char*, sf::Keyboard::Key>& keybinding();
 
 class State {
@@ -25,6 +27,8 @@ class State {
   const char* next{""};
   const char* previous{""};
   std::map<const char*, int> persist;
+  std::map<const char*, int> game_info;
+  std::unique_ptr<OverheadInfo> overhead_info;
 };
 
 class Control {
@@ -44,14 +48,21 @@ class Control {
   const int fps{60};
   bool show_fps{false};
   double current_time{0.0};
-  sf::Keyboard::Key keys;
+  sf::Keyboard::Key keys{sf::Keyboard::Key::Unknown};
   std::map<const char*, State*> state_dict;
   const char* state_name{""};
   State* state{nullptr};
 };
 
 std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
-                                                    std::vector<const char*> accept = {"png", 
-                                                                                            "jpg",
-                                                                                            "bmp"},
-                                                    sf::Color colorkey = {255, 0, 255});
+                                             std::vector<const char*> accept = {"png", 
+                                                                                "jpg",
+                                                                                "bmp"},
+                                             sf::Color colorkey = {255, 0, 255});
+
+void LoadSpriteSheet(sf::Color colorkey, const char* texture_name, sf::Texture& sprite_sheet);
+
+struct Image {
+ public:
+
+};

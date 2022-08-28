@@ -13,9 +13,6 @@ class LoadScreen : public State {
   void Startup(double current_time, std::map<const char*, int> persist) override;
   const char* SetNextState();
   const char* SetOverheadInfoState();
-
-  std::map<const char*, int> game_info;
-  std::unique_ptr<OverheadInfo> overhead_info;
 };
 
 class GameOver : public State {

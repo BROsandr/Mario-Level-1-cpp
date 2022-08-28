@@ -24,7 +24,12 @@ void Control::SetupStates(std::map<const char*, State*>& _state_dict, const char
 
 void Control::main() {
   while (!done && Window::instance().isOpen()) {
+    Window::instance().clear();
+
     EventLoop();
+    Update();
+
+    Window::instance().display();
   }
 }
 
@@ -44,9 +49,12 @@ void Control::EventLoop() {
 
 void Control::Update() {
   current_time = clock.getElapsedTime().asSeconds();
-  
-  if (state->done)
+
+  if (state->quit) {
+    done = true;
+  } else if (state->done) {
     FlipState();
+  }
     
   state->Update(keys, current_time);
 }
@@ -69,6 +77,7 @@ void State::Startup(double current_time, std::map<const char*, int> _persist) {
   persist = _persist;
   start_time = current_time;
 }
+
 void Control::ToggleShowFps(sf::Keyboard::Key key) {
   if (key == sf::Keyboard::F5) {
     show_fps = !show_fps;
@@ -104,4 +113,10 @@ std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
   is_first_pass = false;
 
   return graphics;
+}
+
+void LoadSpriteSheet(sf::Color colorkey, const char* texture_name, sf::Texture& sprite_sheet) {
+  sf::Image image{gfx()[texture_name]};
+  image.createMaskFromColor(colorkey);
+  sprite_sheet.loadFromImage(image);
 }

@@ -6,6 +6,7 @@
 void LoadScreen::Update(sf::Keyboard::Key keys, double current_time) {
   if ((current_time - start_time) < 2400) {
     Window::instance().clear(sf::Color::Black);
+    overhead_info->Update(game_info);
   }
 }
 
