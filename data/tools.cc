@@ -94,8 +94,8 @@ std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
   if (is_first_pass)
     if (std::filesystem::is_directory(directory)) {
       for (auto pic : directory) {
-        std::string name{pic.stem()};
-        std::string ext{pic.extension()};
+        std::string name{pic.stem().string()};
+        std::string ext{pic.extension().string()};
         std::cout << "pic " << pic << std::endl;
         std::cout << "dir " << directory << std::endl;
         std::for_each(ext.begin(), ext.end(), [](char& c) {
@@ -103,7 +103,7 @@ std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
         });
         if (std::find(accept.begin(), accept.end(), ext) != accept.end()) {
           sf::Image image;
-          image.loadFromFile(pic);
+          image.loadFromFile(pic.string());
           graphics[name.c_str()] = image;
         }
       }
