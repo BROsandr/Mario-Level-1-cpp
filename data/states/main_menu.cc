@@ -1,5 +1,3 @@
-#pragma once
-
 #include "main_menu.h"
 
 #include "components/info.h"

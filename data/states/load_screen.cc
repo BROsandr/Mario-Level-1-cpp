@@ -2,6 +2,7 @@
 
 #include "setup.h"
 #include "constants.h"
+#include "components/info.h"
 
 void LoadScreen::Update(sf::Keyboard::Key keys, double current_time) {
   if ((current_time - start_time) < 2400) {

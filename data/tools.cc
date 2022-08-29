@@ -1,6 +1,7 @@
 #include "tools.h"
 
 #include <SFML/Window/Event.hpp>
+#include <iostream>
 
 #include "setup.h"
 #include "components/info.h"
@@ -13,9 +14,6 @@ std::map<const char*, sf::Keyboard::Key>& keybinding() {
 Control::Control(const char caption[]) {
   Window::instance().setTitle(caption);
 }
-
-State::State() = default;
-State::~State() = default;
 
 void Control::SetupStates(std::map<const char*, State*>& _state_dict, const char _start_state[]) {
   state_dict = _state_dict;
@@ -74,7 +72,7 @@ std::map<const char*, int> State::Cleanup() {
   return persist;
 }
 
-void State::Startup(double current_time, std::map<const char*, int> _persist) {
+void State::Startup(double _current_time, std::map<const char*, int> _persist) {
   persist = _persist;
   start_time = current_time;
 }
@@ -98,6 +96,8 @@ std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
       for (auto pic : directory) {
         std::string name{pic.stem()};
         std::string ext{pic.extension()};
+        std::cout << "pic " << pic << std::endl;
+        std::cout << "dir " << directory << std::endl;
         std::for_each(ext.begin(), ext.end(), [](char& c) {
           c = tolower(c);
         });

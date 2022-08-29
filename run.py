@@ -12,4 +12,4 @@ if ret != 0:
 #     for file in libs: shutil.copy(file, './build/')
 # if not os.path.exists(os.path.abspath('./build/resources')):
 #     shutil.copytree('./resources/', './build/resources/')
-os.system('./build/Mario-Level-1-cpp')
+os.system('./build/mario')
