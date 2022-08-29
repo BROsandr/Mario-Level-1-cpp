@@ -23,6 +23,11 @@ constexpr char kCurrentTime[]{"current time"};
 constexpr char kLevelState[]{"level state"};
 constexpr char kCameraStartX[]{"camera start x"};
 constexpr char kMarioDead[]{"mario dead"};
+
+constexpr double kSizeMultiplier{2.5};
+constexpr double kBackgroundMultiplier{2.679};
+constexpr int kGroundHeight = kScreenHeight - 62;
+
 // COLORS
 
 /* constexpr int kgray[] {100, 100, 100}; */

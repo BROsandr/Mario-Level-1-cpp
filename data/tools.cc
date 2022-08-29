@@ -3,6 +3,7 @@
 #include <SFML/Window/Event.hpp>
 
 #include "setup.h"
+#include "components/info.h"
 
 std::map<const char*, sf::Keyboard::Key>& keybinding() {
   static std::map<const char*, sf::Keyboard::Key> keybinding;
@@ -13,8 +14,8 @@ Control::Control(const char caption[]) {
   Window::instance().setTitle(caption);
 }
 
-State::State() {
-}
+State::State() = default;
+State::~State() = default;
 
 void Control::SetupStates(std::map<const char*, State*>& _state_dict, const char _start_state[]) {
   state_dict = _state_dict;

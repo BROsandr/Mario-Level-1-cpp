@@ -22,7 +22,7 @@ struct OverheadInfo {
   void SetLabelRects(std::list<sf::Sprite>& label_list, int x, int y);
   void Update(std::map<const char*, int>& level_info);
 
-  sf::Image* sprite_sheet{nullptr};
+  sf::Texture sprite_sheet;
   int coin_total{-1};
   double time{-1};
   double current_time{-1};

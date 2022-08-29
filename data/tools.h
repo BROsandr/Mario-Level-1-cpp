@@ -8,13 +8,13 @@
 #include <filesystem>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "components/info.h"
 
 std::map<const char*, sf::Keyboard::Key>& keybinding();
 
 class State {
  public:
   explicit State();
+  ~State();
 
   std::map<const char*, int> Cleanup();
   virtual void Startup(double current_time, std::map<const char*, int> persist);
@@ -28,6 +28,7 @@ class State {
   const char* previous{""};
   std::map<const char*, int> persist;
   std::map<const char*, int> game_info;
+  class OverheadInfo;
   std::unique_ptr<OverheadInfo> overhead_info;
 };
 
