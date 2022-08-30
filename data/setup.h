@@ -15,4 +15,4 @@ struct Window {
   explicit Window() {};
 }; 
 
-std::map<const char*, sf::Image>& gfx();
+std::map<std::string, sf::Image>& gfx();

@@ -1,32 +1,32 @@
 #pragma once
 
-constexpr int kScreenHeight{600};
-constexpr int kScreenWidth{600};
+inline constexpr int kScreenHeight{600};
+inline constexpr int kScreenWidth{600};
 
-constexpr int kScreenSize[]{kScreenWidth, kScreenHeight};
+inline constexpr int kScreenSize[]{kScreenWidth, kScreenHeight};
 
-constexpr char kOriginalCaption[]{"Super Mario Bros 1-1"};
+inline constexpr char* kOriginalCaption{"Super Mario Bros 1-1"};
 
 // OVERHEAD INFO STATES
-constexpr char kMainMenu[]{"main menu"};
-constexpr char kLoadScreen[]{"load screen"};
-constexpr char kTimeOut[]{"time out"};
-constexpr char kGameOver[]{"game over"};
-constexpr char kLevel1[]{"level1"};
+inline constexpr char kMainMenu[]{"main menu"};
+inline constexpr char kLoadScreen[]{"load screen"};
+inline constexpr char kTimeOut[]{"time out"};
+inline constexpr char kGameOver[]{"game over"};
+inline constexpr char kLevel1[]{"level1"};
 
 // GAME INFO DICTIONARY KEYS
-constexpr char kCointTotal[]{"coint total"};
-constexpr char kScore[]{"score"};
-constexpr char kTopScore[]{"top score"};
-constexpr char kLives[]{"lives"};
-constexpr char kCurrentTime[]{"current time"};
-constexpr char kLevelState[]{"level state"};
-constexpr char kCameraStartX[]{"camera start x"};
-constexpr char kMarioDead[]{"mario dead"};
+inline constexpr char kCointTotal[]{"coint total"};
+inline constexpr char kScore[]{"score"};
+inline constexpr char kTopScore[]{"top score"};
+inline constexpr char kLives[]{"lives"};
+inline constexpr char kCurrentTime[]{"current time"};
+inline constexpr char kLevelState[]{"level state"};
+inline constexpr char kCameraStartX[]{"camera start x"};
+inline constexpr char kMarioDead[]{"mario dead"};
 
-constexpr double kSizeMultiplier{2.5};
-constexpr double kBackgroundMultiplier{2.679};
-constexpr int kGroundHeight = kScreenHeight - 62;
+inline constexpr double kSizeMultiplier{2.5};
+inline constexpr double kBackgroundMultiplier{2.679};
+inline constexpr int kGroundHeight = kScreenHeight - 62;
 
 // COLORS
 

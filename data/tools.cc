@@ -1,7 +1,6 @@
 #include "tools.h"
 
 #include <SFML/Window/Event.hpp>
-#include <iostream>
 
 #include "setup.h"
 #include "components/info.h"
@@ -18,7 +17,7 @@ Control::Control(const char caption[]) {
 void Control::SetupStates(std::map<const char*, State*>& _state_dict, const char _start_state[]) {
   state_dict = _state_dict;
   state_name = _start_state;
-  state = state_dict[state_name];
+  state = state_dict.at(state_name);
 }
 
 void Control::main() {
@@ -62,7 +61,7 @@ void Control::FlipState() {
   const char* previous{state_name};
   state_name = state->next;
   std::map<const char*, int> persist = state->Cleanup();
-  state = state_dict[state_name];
+  state = state_dict.at(state_name);
   state->Startup(current_time, persist);
   state->previous = previous;
 }
@@ -85,25 +84,23 @@ void Control::ToggleShowFps(sf::Keyboard::Key key) {
   }
 }
 
-std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
+std::map<std::string, sf::Image>& LoadAllGfx(std::filesystem::path directory,
                                                     std::vector<const char*> accept,
                                                     sf::Color colorkey) {
-  static std::map<const char*, sf::Image> graphics;
+  static std::map<std::string, sf::Image> graphics;
   static bool is_first_pass{true};
 
   if (is_first_pass)
     if (std::filesystem::is_directory(directory)) {
-      for (auto pic : directory) {
-        std::string name{pic.stem().string()};
-        std::string ext{pic.extension().string()};
-        std::cout << "pic " << pic << std::endl;
-        std::cout << "dir " << directory << std::endl;
+      for (auto pic : std::filesystem::directory_iterator(directory)) {
+        std::string name{pic.path().stem().string()};
+        std::string ext{pic.path().extension().string()};
         std::for_each(ext.begin(), ext.end(), [](char& c) {
           c = tolower(c);
         });
         if (std::find(accept.begin(), accept.end(), ext) != accept.end()) {
           sf::Image image;
-          image.loadFromFile(pic.string());
+          image.loadFromFile(pic.path().string());
           graphics[name.c_str()] = image;
         }
       }
@@ -117,7 +114,7 @@ std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
 }
 
 void LoadSpriteSheet(sf::Color colorkey, const char* texture_name, sf::Texture& sprite_sheet) {
-  sf::Image image{gfx()[texture_name]};
+  sf::Image image{gfx().at(texture_name)};
   image.createMaskFromColor(colorkey);
   sprite_sheet.loadFromImage(image);
 }

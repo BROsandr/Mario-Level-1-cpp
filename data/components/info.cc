@@ -5,16 +5,16 @@
 #include "constants.h"
 #include "setup.h"
 
-OverheadInfo::OverheadInfo(std::map<const char*, int> _game_info, const char* _state) {
-  sf::Image image{gfx()["text_images"]};
+OverheadInfo::OverheadInfo(std::map<const char*, int>& _game_info, const char* _state) {
+  sf::Image image{gfx().at("text_images")};
   image.createMaskFromColor({92, 148, 252});
   sprite_sheet.loadFromImage(image);
 
-  coin_total = _game_info[kCointTotal];
+  coin_total = _game_info.at(kCointTotal);
   time = 401;
   current_time = 0;
-  total_lives = _game_info[kLives];
-  top_score = _game_info[kTopScore];
+  total_lives = _game_info.at(kLives);
+  top_score = _game_info.at(kTopScore);
   state = _state;
   game_info = _game_info;
 
@@ -106,7 +106,7 @@ void OverheadInfo::CreateLabel(std::list<sf::Sprite>& label_list,
                  int x, 
                  int y) {
   for (auto letter : string) 
-    label_list.push_back(image_dict[letter]);
+    label_list.push_back(image_dict.at(letter));
 
   SetLabelRects(label_list, x, y);
 }
@@ -115,7 +115,7 @@ void OverheadInfo::SetLabelRects(std::list<sf::Sprite>& label_list, int x, int y
   int i{0};
   for (auto letter : label_list) {
     letter.setPosition(x + ((letter.getTextureRect().width + 3) * i), y);
-    if(letter.getTexture() == image_dict['-'].getTexture()) 
+    if(letter.getTexture() == image_dict.at('-').getTexture()) 
   letter.setPosition(letter.getPosition().x + 7, letter.getPosition().y + 2);
     
   }

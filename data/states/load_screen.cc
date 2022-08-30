@@ -13,7 +13,7 @@ void LoadScreen::Update(sf::Keyboard::Key keys, double current_time) {
 
 void LoadScreen::Startup(double current_time, std::map<const char*, int> _persist) {
   State::Startup(current_time, _persist);
-  game_info = persist;
+  game_info = _persist;
   next = SetNextState();
 
   const char* info_state{SetOverheadInfoState()};

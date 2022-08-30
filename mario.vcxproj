@@ -104,6 +104,7 @@
     <ClCompile Include="data\components\info.cc" />
     <ClCompile Include="data\main.cc" />
     <ClCompile Include="data\setup.cc" />
+    <ClCompile Include="data\constants.cpp" />
     <ClCompile Include="data\states\load_screen.cc" />
     <ClCompile Include="data\states\main_menu.cc" />
     <ClCompile Include="data\tools.cc" />

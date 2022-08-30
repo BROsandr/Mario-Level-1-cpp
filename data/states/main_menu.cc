@@ -33,7 +33,7 @@ sf::Sprite Menu::GetImage(int x, int y, int width, int height, sf::Image& _sprit
   image.copy(_sprite_sheet, 0, 0, {x, y, width, height});
   sf::Sprite sprite;
   textures.push_back({});
-  if (&_sprite_sheet == &gfx()["title_screen"]) {
+  if (&_sprite_sheet == &gfx().at("title_screen")) {
     image.createMaskFromColor({255, 0, 220});
     textures.back().loadFromImage(image);
     sprite.setTexture(textures.back());
@@ -49,11 +49,11 @@ sf::Sprite Menu::GetImage(int x, int y, int width, int height, sf::Image& _sprit
 
 void Menu::SetupBackground() {
   textures.push_back({});
-  textures.back().loadFromImage(gfx()["level_1"]);
+  textures.back().loadFromImage(gfx().at("level_1"));
   background.setTexture(textures.back());
   background.scale(kBackgroundMultiplier, kBackgroundMultiplier);
   
-  image_dict["GAME_NAME_BOX"] = GetImage(1, 60, 176, 88, gfx()["title_screen"]);
+  image_dict["GAME_NAME_BOX"] = GetImage(1, 60, 176, 88, gfx().at("title_screen"));
 }
 
 void Menu::SetupMario() {
@@ -61,17 +61,17 @@ void Menu::SetupMario() {
 }
 
 void Menu::SetupCursor() {
-  cursor = GetImage(24, 160, 8, 8, gfx()["item_objects"]);
+  cursor = GetImage(24, 160, 8, 8, gfx().at("item_objects"));
   cursor.setPosition(220, 358);
 }
 
 void Menu::Update(sf::Keyboard::Key keys, double _current_time) {
   current_time = _current_time;
-  game_info[kCurrentTime] = current_time;
+  game_info.at(kCurrentTime) = current_time;
   overhead_info->Update(game_info);
 
   Window::instance().draw(background);
-  Window::instance().draw(image_dict["GAME_NAME_BOX"]);
+  Window::instance().draw(image_dict.at("GAME_NAME_BOX"));
   Window::instance().draw(mario);
   Window::instance().draw(cursor);
 }

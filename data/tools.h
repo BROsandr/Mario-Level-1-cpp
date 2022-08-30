@@ -53,10 +53,10 @@ class Control {
   State* state{nullptr};
 };
 
-std::map<const char*, sf::Image>& LoadAllGfx(std::filesystem::path directory,
-                                             std::vector<const char*> accept = {"png", 
-                                                                                "jpg",
-                                                                                "bmp"},
+std::map<std::string, sf::Image>& LoadAllGfx(std::filesystem::path directory,
+                                             std::vector<const char*> accept = {".png", 
+                                                                                ".jpg",
+                                                                                ".bmp"},
                                              sf::Color colorkey = {255, 0, 255});
 
 void LoadSpriteSheet(sf::Color colorkey, const char* texture_name, sf::Texture& sprite_sheet);

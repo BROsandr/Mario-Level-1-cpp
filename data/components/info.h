@@ -8,7 +8,7 @@
 
 struct OverheadInfo {
  public:
-  OverheadInfo(std::map<const char*, int> game_info, const char* state);
+  OverheadInfo(std::map<const char*, int>& game_info, const char* state);
 
   void CreateImageDict();
   sf::Sprite GetImage(int x, int y, int width, int height);
