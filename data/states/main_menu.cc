@@ -59,7 +59,7 @@ void Menu::SetupBackground() {
 }
 
 void Menu::SetupMario() {
-  mario.setPosition(110, kGroundHeight);
+  mario.image.setPosition(110, kGroundHeight - mario.image.getGlobalBounds().height);
 }
 
 void Menu::SetupCursor() {
@@ -74,6 +74,6 @@ void Menu::Update(sf::Keyboard::Key keys, double _current_time) {
 
   Window::instance().draw(background);
   Window::instance().draw(image_dict.at("GAME_NAME_BOX"));
-  Window::instance().draw(mario);
+  Window::instance().draw(mario.image);
   Window::instance().draw(cursor);
 }
