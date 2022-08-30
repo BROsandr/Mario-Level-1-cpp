@@ -1,7 +1,7 @@
 #pragma once
 
 inline constexpr int kScreenHeight{600};
-inline constexpr int kScreenWidth{600};
+inline constexpr int kScreenWidth{800};
 
 inline constexpr int kScreenSize[]{kScreenWidth, kScreenHeight};
 
