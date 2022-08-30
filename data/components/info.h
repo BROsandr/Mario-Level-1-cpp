@@ -8,7 +8,7 @@
 
 struct OverheadInfo {
  public:
-  OverheadInfo(std::map<const char*, int>& game_info, const char* state);
+  OverheadInfo(std::map<std::string, int>& game_info, const char* state);
 
   void CreateImageDict();
   sf::Sprite GetImage(int x, int y, int width, int height);
@@ -20,7 +20,7 @@ struct OverheadInfo {
                    int x, 
                    int y);
   void SetLabelRects(std::list<sf::Sprite>& label_list, int x, int y);
-  void Update(std::map<const char*, int>& level_info);
+  void Update(std::map<std::string, int>& level_info);
 
   sf::Texture sprite_sheet;
   int coin_total{-1};
@@ -29,7 +29,7 @@ struct OverheadInfo {
   int total_lives{-1};
   int top_score{-1};
   const char* state{""};
-  std::map<const char*, int> game_info;
+  std::map<std::string, int> game_info;
   std::map<char, sf::Sprite> image_dict;
   std::list<sf::Sprite> score_images;
 };

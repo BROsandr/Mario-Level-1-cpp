@@ -9,14 +9,14 @@
 #include <SFML/Graphics/Texture.hpp>
 
 
-std::map<const char*, sf::Keyboard::Key>& keybinding();
+std::map<std::string, sf::Keyboard::Key>& keybinding();
 
 struct OverheadInfo;
 
 class State {
  public:
-  std::map<const char*, int> Cleanup();
-  virtual void Startup(double current_time, std::map<const char*, int> persist);
+  std::map<std::string, int> Cleanup();
+  virtual void Startup(double current_time, std::map<std::string, int> persist);
   virtual void Update(sf::Keyboard::Key keys, double current_time) = 0;
 
   double start_time{0.0};
@@ -25,8 +25,8 @@ class State {
   bool quit{false};
   const char* next{""};
   const char* previous{""};
-  std::map<const char*, int> persist;
-  std::map<const char*, int> game_info;
+  std::map<std::string, int> persist;
+  std::map<std::string, int> game_info;
   std::unique_ptr<OverheadInfo> overhead_info;
 };
 
@@ -34,7 +34,7 @@ class Control {
  public:
   explicit Control(const char caption[]);
 
-  void SetupStates(std::map<const char*, State*>& state_dict, const char start_state[]);
+  void SetupStates(std::map<std::string, State*>& state_dict, const char start_state[]);
   void main();
   void EventLoop();
   void Update();
@@ -48,7 +48,7 @@ class Control {
   bool show_fps{false};
   double current_time{0.0};
   sf::Keyboard::Key keys{sf::Keyboard::Key::Unknown};
-  std::map<const char*, State*> state_dict;
+  std::map<std::string, State*> state_dict;
   const char* state_name{""};
   State* state{nullptr};
 };

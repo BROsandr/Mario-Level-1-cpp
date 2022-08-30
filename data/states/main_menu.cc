@@ -17,7 +17,7 @@ Menu::Menu() {
   Startup(0.0, persist);
 }
 
-void Menu::Startup(double current_time, std::map<const char*, int> _persist) {
+void Menu::Startup(double current_time, std::map<std::string, int> _persist) {
   next = kLoadScreen;
   persist = _persist;
   game_info = _persist;
@@ -48,15 +48,14 @@ sf::Sprite Menu::GetImage(int x, int y, int width, int height, sf::Image& _sprit
   return sprite;
 }
 
-constexpr char kGameNameBox[]{"GAME_NAME_BOX"};
-
 void Menu::SetupBackground() {
   textures.push_back({});
   textures.back().loadFromImage(gfx().at("level_1"));
   background.setTexture(textures.back());
   background.scale(kBackgroundMultiplier, kBackgroundMultiplier);
   
-  image_dict[kGameNameBox] = GetImage(1, 60, 176, 88, gfx().at("title_screen"));
+  image_dict["GAME_NAME_BOX"] = GetImage(1, 60, 176, 88, gfx().at("title_screen"));
+  image_dict["GAME_NAME_BOX"].setPosition(170, 100);
 }
 
 void Menu::SetupMario() {
@@ -74,7 +73,7 @@ void Menu::Update(sf::Keyboard::Key keys, double _current_time) {
   overhead_info->Update(game_info);
 
   Window::instance().draw(background);
-  Window::instance().draw(image_dict.at(kGameNameBox));
+  Window::instance().draw(image_dict.at("GAME_NAME_BOX"));
   Window::instance().draw(mario);
   Window::instance().draw(cursor);
 }

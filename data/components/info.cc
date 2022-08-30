@@ -5,7 +5,7 @@
 #include "constants.h"
 #include "setup.h"
 
-OverheadInfo::OverheadInfo(std::map<const char*, int>& _game_info, const char* _state) {
+OverheadInfo::OverheadInfo(std::map<std::string, int>& _game_info, const char* _state) {
   sf::Image image{gfx().at("text_images")};
   image.createMaskFromColor({92, 148, 252});
   sprite_sheet.loadFromImage(image);
@@ -121,5 +121,5 @@ void OverheadInfo::SetLabelRects(std::list<sf::Sprite>& label_list, int x, int y
   }
 }
 
-void OverheadInfo::Update(std::map<const char*, int>& level_info) {
+void OverheadInfo::Update(std::map<std::string, int>& level_info) {
 }

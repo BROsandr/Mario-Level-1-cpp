@@ -5,8 +5,8 @@
 #include "setup.h"
 #include "components/info.h"
 
-std::map<const char*, sf::Keyboard::Key>& keybinding() {
-  static std::map<const char*, sf::Keyboard::Key> keybinding;
+std::map<std::string, sf::Keyboard::Key>& keybinding() {
+  static std::map<std::string, sf::Keyboard::Key> keybinding;
   return keybinding;
 }
 
@@ -14,7 +14,7 @@ Control::Control(const char caption[]) {
   Window::instance().setTitle(caption);
 }
 
-void Control::SetupStates(std::map<const char*, State*>& _state_dict, const char _start_state[]) {
+void Control::SetupStates(std::map<std::string, State*>& _state_dict, const char _start_state[]) {
   state_dict = _state_dict;
   state_name = _start_state;
   state = state_dict.at(state_name);
@@ -60,18 +60,18 @@ void Control::Update() {
 void Control::FlipState() {
   const char* previous{state_name};
   state_name = state->next;
-  std::map<const char*, int> persist = state->Cleanup();
+  std::map<std::string, int> persist = state->Cleanup();
   state = state_dict.at(state_name);
   state->Startup(current_time, persist);
   state->previous = previous;
 }
 
-std::map<const char*, int> State::Cleanup() {
+std::map<std::string, int> State::Cleanup() {
   done = false;
   return persist;
 }
 
-void State::Startup(double _current_time, std::map<const char*, int> _persist) {
+void State::Startup(double _current_time, std::map<std::string, int> _persist) {
   persist = _persist;
   start_time = current_time;
 }

@@ -10,7 +10,7 @@ class LoadScreen : public State {
   explicit LoadScreen() {};
 
   void Update(sf::Keyboard::Key keys, double current_time) override;
-  void Startup(double current_time, std::map<const char*, int> persist) override;
+  void Startup(double current_time, std::map<std::string, int> persist) override;
   const char* SetNextState();
   const char* SetOverheadInfoState();
 };
