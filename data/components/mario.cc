@@ -65,14 +65,14 @@ void Mario::LoadImagesFromSheet() {
   right_small_normal_frames.push_back(GetImage(193, 2, 16, 30));
   right_small_normal_frames.push_back(GetImage(209, 2, 16, 29));
 
-  for (auto frame : right_small_normal_frames) {
+  for (auto& frame : right_small_normal_frames) {
     sf::Sprite new_image{frame};
     new_image.setOrigin({ new_image.getLocalBounds().width, 0 });
     new_image.setScale({ -1, 1 });
     left_small_normal_frames.push_back(new_image);
   }
 
-  for (auto frame : left_small_normal_frames) {
+  for (auto& frame : left_small_normal_frames) {
     sf::Sprite new_image{frame};
     new_image.setOrigin({ new_image.getLocalBounds().width, 0 });
     new_image.setScale({ -1, 1 });

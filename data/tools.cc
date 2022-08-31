@@ -92,7 +92,7 @@ std::map<std::string, sf::Image>& LoadAllGfx(std::filesystem::path directory,
 
   if (is_first_pass)
     if (std::filesystem::is_directory(directory)) {
-      for (auto pic : std::filesystem::directory_iterator(directory)) {
+      for (auto& pic : std::filesystem::directory_iterator(directory)) {
         std::string name{pic.path().stem().string()};
         std::string ext{pic.path().extension().string()};
         std::for_each(ext.begin(), ext.end(), [](char& c) {

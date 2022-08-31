@@ -20,6 +20,7 @@ OverheadInfo::OverheadInfo(std::map<std::string, int>& _game_info, const char* _
 
   CreateImageDict();
   CreateScoreGroup();
+  CreateMainMenuLabels();
 }
 
 void OverheadInfo::CreateImageDict() {
@@ -35,7 +36,6 @@ void OverheadInfo::CreateImageDict() {
   image_list.push_back(GetImage(59, 230, 7, 7));
   image_list.push_back(GetImage(67, 230, 7, 7));
   image_list.push_back(GetImage(75, 230, 7, 7));
-
 
   image_list.push_back(GetImage(83, 230, 7, 7));
   image_list.push_back(GetImage(91, 230, 7, 7));
@@ -71,7 +71,7 @@ void OverheadInfo::CreateImageDict() {
 
   std::string_view character_string{"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ -*"};
 
-  for (auto character : character_string) {
+  for (auto& character : character_string) {
     image_dict[character] = image_list.front();
     image_list.pop_front();
   }
@@ -85,15 +85,15 @@ sf::Sprite OverheadInfo::GetImage(int x, int y, int width, int height) {
 }
 
 void OverheadInfo::Draw() {
-  if (state == kMainMenu) {
-    /* DrawMainMenuInfo(); */
+  if (!strcmp(state, kMainMenu)) {
+    DrawMainMenuInfo();
   } else if (state == kLoadScreen) {
     DrawLoadingScreenInfo();
   }
 }
 
 void OverheadInfo::DrawLoadingScreenInfo() {
-  for (auto info : score_images)
+  for (auto& info : score_images)
     Window::instance().draw(info);
 }
 
@@ -101,11 +101,11 @@ void OverheadInfo::CreateScoreGroup() {
   CreateLabel(score_images, "000000", 75, 55);
 }
 
-void OverheadInfo::CreateLabel(std::list<sf::Sprite>& label_list, 
-                 const std::string& string, 
-                 int x, 
-                 int y) {
-  for (auto letter : string) 
+void OverheadInfo::CreateLabel(std::list<sf::Sprite>& label_list,
+                               const std::string& string,
+                               int x,
+                               int y) {
+  for (auto& letter : string) 
     label_list.push_back(image_dict.at(letter));
 
   SetLabelRects(label_list, x, y);
@@ -113,13 +113,35 @@ void OverheadInfo::CreateLabel(std::list<sf::Sprite>& label_list,
 
 void OverheadInfo::SetLabelRects(std::list<sf::Sprite>& label_list, int x, int y) {
   int i{0};
-  for (auto letter : label_list) {
-    letter.setPosition(x + ((letter.getTextureRect().width + 3) * i), y);
-    if(letter.getTexture() == image_dict.at('-').getTexture()) 
-  letter.setPosition(letter.getPosition().x + 7, letter.getPosition().y + 2);
-    
+  for (auto& letter : label_list) {
+    letter.setPosition(x + ((letter.getGlobalBounds().width + 3) * i++), y);
+    //if (letter.getTexture() == image_dict.at('-').getTexture()) 
+    //  letter.setPosition(letter.getPosition().x + 7, letter.getPosition().y + 2);
   }
 }
 
 void OverheadInfo::Update(std::map<std::string, int>& level_info) {
+}
+
+void OverheadInfo::DrawMainMenuInfo() {
+  for (auto& info : score_images) 
+    Window::instance().draw(info);
+
+  for (auto& label : main_menu_labels) 
+    for (auto& letter : label) 
+      Window::instance().draw(letter);
+}
+
+void OverheadInfo::CreateMainMenuLabels() {
+  std::list<sf::Sprite> player_one_game;
+  std::list<sf::Sprite> player_two_game;
+  std::list<sf::Sprite> top;
+  std::list<sf::Sprite> top_score;
+
+  CreateLabel(player_one_game, "1 PLAYER GAME", 272, 360);
+  CreateLabel(player_two_game, "2 PLAYER GAME", 272, 405);
+  CreateLabel(top, "TOP - ", 290, 465);
+  CreateLabel(top_score, "000000", 400, 465);
+  
+  main_menu_labels = {player_one_game, player_two_game, top, top_score};
 }

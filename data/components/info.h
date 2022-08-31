@@ -14,7 +14,9 @@ struct OverheadInfo {
   sf::Sprite GetImage(int x, int y, int width, int height);
   void Draw();
   void DrawLoadingScreenInfo();
+  void DrawMainMenuInfo();
   void CreateScoreGroup();
+  void CreateMainMenuLabels();
   void CreateLabel(std::list<sf::Sprite>& label_list, 
                    const std::string& string, 
                    int x, 
@@ -32,4 +34,5 @@ struct OverheadInfo {
   std::map<std::string, int> game_info;
   std::map<char, sf::Sprite> image_dict;
   std::list<sf::Sprite> score_images;
+  std::list<std::list<sf::Sprite>> main_menu_labels;
 };

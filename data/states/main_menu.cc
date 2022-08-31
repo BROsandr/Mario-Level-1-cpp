@@ -76,4 +76,5 @@ void Menu::Update(sf::Keyboard::Key keys, double _current_time) {
   Window::instance().draw(image_dict.at("GAME_NAME_BOX"));
   Window::instance().draw(mario.image);
   Window::instance().draw(cursor);
+  overhead_info->Draw();
 }
